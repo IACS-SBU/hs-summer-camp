@@ -5,7 +5,7 @@ import pylab as plb
 import matplotlib.pyplot as plt
 from numpy import pi
 from colorsys import hls_to_rgb
-
+from textwrap import wrap
 
 '''
     Generates fractal images based on the mapping of an initial guess to a Newton-Raphson
@@ -70,10 +70,10 @@ def colorize(z):
        
 #Main program
 print 'Enter the coefficients of your polynomial (up to degree 10) seperated by spaces. \nFor example the polynomial \n\n\tx^2 + 2x + 3\n\nwould be entered as \"1 2 3\":'
-coeff = raw_input().split(' ')
+coeff = raw_input().split()
 left_bc = -1000
 right_bc = 1000
-size = 300
+size = 100
 
 #Cast the entries as floating point numbers
 coeff = [float(i) for i in coeff]
@@ -89,11 +89,20 @@ for i in range(len(x)):
     for j in range(len(x)):
         data[i][j] = newton(complex(x[i]/float(size),x[j]/float(size)), coeff)
 
+#Generating a string of the entered polynomial
+polynomial = ""
+for i in range(len(coeff)):
+    if i == 0:
+        polynomial += "%d * x^%d " % (coeff[i], len(coeff) - i) 
+    else:
+        polynomial += "+ %d * x^%d " % (coeff[i], len(coeff) - i)
+
 #Plotting
 img = colorize(data)
 im = plb.imshow(img)
 im.axes.get_xaxis().set_visible(False)
 im.axes.get_yaxis().set_visible(False)
+plb.title("\n".join(wrap(polynomial)))
 plb.savefig('fractal.pdf', bbox_inches='tight')
 plt.show()
 

@@ -6,7 +6,7 @@ import pylab as plb
 import matplotlib.pyplot as plt
 from numpy import pi
 from colorsys import hls_to_rgb
-
+from textwrap import wrap
 
 '''
     Parallel version of newton.py to generate fractals based on the mapping of an initial guess to a Newton-Raphson
@@ -106,11 +106,20 @@ job_server.print_stats()
 for a in x:
     data[a[1]][a[2]] = a[0]
 
+#Generating a string of the entered polynomial
+polynomial = ""
+for i in range(len(coeff)):
+    if i == 0:
+        polynomial += "%d * x^%d " % (coeff[i], len(coeff) - i)
+    else:
+        polynomial += "+ %d * x^%d " % (coeff[i], len(coeff) - i)
+
 #Plotting
 img = colorize(data)
 im = plb.imshow(img)
 im.axes.get_xaxis().set_visible(False)
 im.axes.get_yaxis().set_visible(False)
+plb.title("\n".join(wrap(polynomial)))
 plb.savefig('fractal.pdf', bbox_inches='tight')
 plt.show()
 
