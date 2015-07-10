@@ -1,7 +1,6 @@
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from math import *
 from random import randint
 
 '''
@@ -105,5 +104,5 @@ while 1:
     # Update visualization of the board 
     im.set_data(current)
     plt.draw()
-    time.sleep(0.01)
+    plt.pause(0.01)
    
