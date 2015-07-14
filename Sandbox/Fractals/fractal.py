@@ -1,5 +1,5 @@
 
-import math
+#import math
 import numpy as np
 import pylab as plb
 import matplotlib.pyplot as plt
@@ -11,8 +11,8 @@ from textwrap import wrap
     Generates fractal images based on the mapping of an initial guess to a Newton-Raphson
     root finding algorithm to the root it finds.
 
-    WARNING: Be very careful with the size attribute (line 77), as the program is VERY slow (run time of ~10 minuets)
-             if this variable is greater than 300
+    WARNING: Be very careful with the size attribute (line 77), as the program is VERY slow if this
+             variable is greater than 200
 
 '''
 
@@ -73,7 +73,7 @@ print 'Enter the coefficients of your polynomial (up to degree 10) seperated by 
 coeff = raw_input().split()
 left_bc = -1000
 right_bc = 1000
-size = 100
+size = 300
 
 #Cast the entries as floating point numbers
 coeff = [float(i) for i in coeff]
@@ -93,7 +93,7 @@ for i in range(len(x)):
 polynomial = ""
 for i in range(len(coeff)):
     if i == 0:
-        polynomial += "%d * x^%d " % (coeff[i], len(coeff) - i) 
+        polynomial += "%d * x^%d " % (coeff[i], len(coeff) - i)
     else:
         polynomial += "+ %d * x^%d " % (coeff[i], len(coeff) - i)
 
@@ -105,4 +105,5 @@ im.axes.get_yaxis().set_visible(False)
 plb.title("\n".join(wrap(polynomial)))
 plb.savefig('fractal.pdf', bbox_inches='tight')
 plt.show()
+
 
