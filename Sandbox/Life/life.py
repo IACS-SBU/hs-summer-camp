@@ -46,6 +46,13 @@ im.axes.get_yaxis().set_visible(False)
 plt.ion()
 plt.show()
 
+props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+box = plt.text(1,1, 'Initial Configuration. Click to start', fontsize=14, verticalalignment='top', bbox=props)
+ 
+# Freeze image
+plt.waitforbuttonpress() 
+box.remove()
+
 # Step counter
 n = 0
 
